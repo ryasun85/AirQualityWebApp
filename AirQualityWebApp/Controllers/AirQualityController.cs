@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using AirQualityService.Services;
 using AirQualityService.Models.Country;
+using AirQualityWebApp.Models;
+using System.Diagnostics.Metrics;
 
 namespace AirQualityWebApp.Controllers
 {
@@ -21,27 +23,66 @@ namespace AirQualityWebApp.Controllers
            _measurementsService = measurementsService;
         }
 
-        //TEST METHOD
-        public ActionResult TestCountryService()
+        //Get List of countres and display them in dropdown
+        public ActionResult Index()
         {
-            List<CountryDTO> myList = new List<CountryDTO>();
-            var myresponse = _countryService.GetAllCountries();
-            return View(myresponse);
+            var myresponse = _countryService.GetAllCountries();            
+            CountriesData countriesData = new CountriesData(myresponse);
+
+            AirQualityViewModel oneViewModel = new AirQualityViewModel(countriesData);
+
+            return View(oneViewModel);
         }
 
-        //  foreach (var myDto in myList.ToList())
-        //    {
-        //        var myresponse = _countryService.GetAllCountries();
-        //CountryDTO countryDTO = new CountryDTO(myresponse);
+        //Post country code back so can be used in Cities service
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(/*AirQualityViewModel airQualityViewModel, */string countryCode)
+        {
+           //countryCode = airQualityViewModel.CountryCode;
 
-        //myList.Add(countryDTO);
+           return RedirectToAction("Cities", "AirQuality", new { countryCode = countryCode });
+         //return RedirectToAction("Cities", "AirQuality", new { countryCode = airQualityViewModel.CountryCode });
 
+        }
 
-        //    }         
-            //return View(myList);
+        [HttpGet]
+        public ActionResult Cities(string countryCode)
+        {
 
-    //https://localhost:7034/AirQuality/TestCityService?code=af
-    public ActionResult TestCityService(string code)
+            var myresponse = _cityService.GetAllCitiesByCountry(countryCode);
+
+             
+            //If(myresponse.Results[0].City == null || myresponse.Results[0].City == "N/A"){ }
+            if (myresponse.Meta.Found == 0)
+            {
+               ViewBag.myErrorMsg = "The Country you have selected has no cities or measurements provided";
+               // return View(myViewModel);
+            }
+        
+            CitiesData citiesData = new CitiesData(myresponse);
+
+            AirQualityViewModel oneViewModel = new AirQualityViewModel(citiesData);
+            
+            return View(oneViewModel);
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]        
+        public ActionResult Cities(string countryCode, string cityName)
+        {
+              return RedirectToAction("Measurements", "AirQuality", new { countryCode = countryCode, cityName = cityName});
+            //return RedirectToAction("Cities", "AirQuality", new { countryCode = airQualityViewModel.CountryCode });
+
+        }
+
+        public ActionResult Measurements(string countryCode, string cityName)
+        {
+            return View();
+        }
+        //https://localhost:7034/AirQuality/TestCityService?code=af
+        public ActionResult TestCityService(string code)
         {
             var myresponse = _cityService.GetAllCitiesByCountry(code);
             return View(myresponse);
@@ -53,81 +94,5 @@ namespace AirQualityWebApp.Controllers
             return View(myresponse);
         }
 
-        #region
-        // GET: AirQualityController
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //    // GET: AirQualityController/Details/5
-        //    public ActionResult Details(int id)
-        //    {
-        //        return View();
-        //    }
-
-        //    // GET: AirQualityController/Create
-        //    public ActionResult Create()
-        //    {
-        //        return View();
-        //    }
-
-        //    // POST: AirQualityController/Create
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public ActionResult Create(IFormCollection collection)
-        //    {
-        //        try
-        //        {
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch
-        //        {
-        //            return View();
-        //        }
-        //    }
-
-        //    // GET: AirQualityController/Edit/5
-        //    public ActionResult Edit(int id)
-        //    {
-        //        return View();
-        //    }
-
-        //    // POST: AirQualityController/Edit/5
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public ActionResult Edit(int id, IFormCollection collection)
-        //    {
-        //        try
-        //        {
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch
-        //        {
-        //            return View();
-        //        }
-        //    }
-
-        //    // GET: AirQualityController/Delete/5
-        //    public ActionResult Delete(int id)
-        //    {
-        //        return View();
-        //    }
-
-        //    // POST: AirQualityController/Delete/5
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public ActionResult Delete(int id, IFormCollection collection)
-        //    {
-        //        try
-        //        {
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch
-        //        {
-        //            return View();
-        //        }
-        //    }
-        #endregion
     }
 }

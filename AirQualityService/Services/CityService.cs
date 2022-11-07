@@ -45,12 +45,17 @@ namespace AirQualityService.Services
               var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/cities?limit=100&page=1&offset=0&sort=asc&order_by=city&country_id=" + countryCode).Result;
 
                 CityDTO cityDTO = JsonConvert.DeserializeObject<CityDTO>(response);
-
-                if (!string.IsNullOrWhiteSpace(response) && cityDTO.Meta.Found > 0)
+                       //IF check respons>=0 not just >0)  //TODO results null?? check META >=0
+                if (!string.IsNullOrWhiteSpace(response) && cityDTO.Meta.Found >= 0 /*&& cityDTO.Results != null*/)
                 {
                     returnValue = cityDTO;
                     _logger.LogInformation("Success!");
                 }
+                //perhaps?
+                //else
+                //{
+                //    returnValue = new CityDTO();
+                //}
 
             }
             catch (Exception ex)

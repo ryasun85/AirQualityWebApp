@@ -7,23 +7,26 @@ namespace AirQualityWebApp.Models
     {
         public CountriesData(CountryDTO countryDTO)
         {
+            Countries = new List<SelectListItem>();
+
             foreach (var item in countryDTO.Results)
             {
+                     
                 SelectListItem listItem = new SelectListItem();
+              
                 listItem.Text = item.Name; 
                 listItem.Value = item.Code;
                
                 Countries.Add(listItem);
                 
             }
-
-            
+                       
         }
 
-        public List<SelectListItem> Countries { get; set; }
+        public List<SelectListItem> Countries { get; set; } /*= default!;*/
 
         //public string CountryName { get; set; }
         //public string CountryCode { get; set; }
-        public int Cities { get; set; }
+        //public int Cities { get; set; }
     }
 }

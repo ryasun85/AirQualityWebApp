@@ -36,11 +36,10 @@ namespace AirQualityService.Services
             CountryDTO returnValue = new CountryDTO();
 
             try
-            {
-               var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/countries").Result;
-                //var response = _httpClient.GetStringAsync("countries").Result;
-
-                //CountryDTO countryDTO = new CountryDTO();
+            {   //TODO check if can change order by Country name 
+                //var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/countries?limit=200&page=1&offset=0&sort=asc&order_by=country").Result;
+                var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/countries").Result;
+        
 
                 CountryDTO countryDTO = JsonConvert.DeserializeObject<CountryDTO>(response);
 

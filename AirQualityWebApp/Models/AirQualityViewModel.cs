@@ -1,26 +1,38 @@
-﻿using AirQualityWebApp.Models;
+﻿using AirQualityService.Models.Measurements;
+using AirQualityWebApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AirQualityWebApp.Models
 {
     public class AirQualityViewModel
     {
-        public AirQualityViewModel(/*middleClass*/CountriesData countriesData)
+        public AirQualityViewModel(CountriesData countriesData)
         {
-            Countries = countriesData.Countries;
-            //CityName = Dto.city_name;
+           Countries = countriesData.Countries;
+        
         }
-        //CountryCode
+      
+        public string CountryCode { get; set; } //On Post 
+        public List<SelectListItem> Countries { get; set; }
 
-       public List<SelectListItem> Countries { get; set; }
+        public AirQualityViewModel(CitiesData citiesData)
+        {        
+            Cities = citiesData.Cities;
+           
+           
+        }
 
-        //public string CityName { get; set; }
-        //public List<SelectListItem> Cities { get; set; }
+        public string CityName { get; set; }
 
-        //CountryCode
+        public List<SelectListItem> Cities { get; set; }
+
+        public AirQualityViewModel(MeasurementsDTO measurementsDTO)
+        {
+           //Measurements =  measurementsDTO.Results
+        }
+        //public List<Measurements> Measurements { get; set; }
+
+
     }
 }
 
-//CountryCode = countriesData.Countries
-//            CityName = countriesData.Countries
-//            Countries = countriesData.Countries;
