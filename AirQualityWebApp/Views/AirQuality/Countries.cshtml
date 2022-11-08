@@ -1,0 +1,22 @@
+﻿@model AirQualityWebApp.Models.AirQualityViewModel
+
+@{
+    ViewData["Title"] = "Countries";
+}
+
+<h4>Please select country from the list below:</h4>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.DisplayNameFor(model => model.Countries)
+    </div>
+
+    <div>
+        @Html.DropDownListFor(model=> model.CountryCode, Model.Countries)
+        <input type="submit" value="Select Country" class="btn btn-success" />
+    </div>
+}

@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace AirQualityService.Models.Measurements
 {
-    //public class MeasurementsDTO
-    //{// Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
         public class Coordinates
         {
             [JsonPropertyName("latitude")]
@@ -72,7 +70,7 @@ namespace AirQualityService.Models.Measurements
             public List<Measurement> Measurements { get; set; }
         }
 
-        public class /*Root*/ MeasurementsDTO
+        public class MeasurementsDTO
         {
             [JsonPropertyName("meta")]
             public Meta Meta { get; set; }
@@ -83,4 +81,4 @@ namespace AirQualityService.Models.Measurements
 
 
     }
-//}
+

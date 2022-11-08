@@ -6,6 +6,10 @@ namespace AirQualityWebApp.Models
 {
     public class CitiesData
     {
+        /// <summary>
+        /// this class function is getting only required data from DTO 
+        /// rather than everything. Only this data will be passed onto the viewModel
+        /// </summary>
         public CitiesData(CityDTO cityDTO)
         {
             Cities = new List<SelectListItem>();

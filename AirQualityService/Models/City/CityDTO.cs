@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace AirQualityService.Models.City
 {
-    //public class CityDTO
-    //{
-        // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
         public class Meta
         {
             [JsonPropertyName("name")]
@@ -55,7 +52,7 @@ namespace AirQualityService.Models.City
             public List<string> Parameters { get; set; }
         }
 
-        public class/* Root*/ CityDTO
+        public class CityDTO
         {
             [JsonPropertyName("meta")]
             public Meta Meta { get; set; }
@@ -66,4 +63,3 @@ namespace AirQualityService.Models.City
 
 
     }
-//}

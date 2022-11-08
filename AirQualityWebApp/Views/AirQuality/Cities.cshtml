@@ -1,26 +1,30 @@
 ﻿@model AirQualityWebApp.Models.AirQualityViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cities";
 }
 
 <h3 class="alert-danger">@ViewBag.myErrorMsg</h3>
+
 <div>
-    @Html.ActionLink("Back to Countries List", "Index", null, null,new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to Countries List", "Countries", null, null,new { @class = "btn btn-primary" })
 </div>
 
-<h1>Cities</h1>
-@using (Html.BeginForm())
+@if (Model.Cities != null && Model.Cities.Count() > 0)
 {
-@Html.AntiForgeryToken()
- //@Html.HiddenFor(model => model.CountryCode)
-//@Html.HiddenFor(model => model.City)
-    <div>
-        @Html.DisplayNameFor(model => model.Cities)
-    </div>
+    <h4>Please select city from the list below:</h4>
 
-    <div>
-         @Html.DropDownListFor(model=> model.CityName, Model.Cities)
-       <input type="submit" value="Select City" class="btn btn-success" />
-    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.DisplayNameFor(model => model.Cities)
+        </div>
+
+        <div>
+            @Html.DropDownListFor(model=> model.CityName, Model.Cities)
+            <input type="submit" value="Select City" class="btn btn-success" />
+        </div>
+    }
 }
+

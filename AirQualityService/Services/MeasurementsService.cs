@@ -35,10 +35,8 @@ namespace AirQualityService.Services
             MeasurementsDTO returnValue = new MeasurementsDTO();
 
             try
-            {
-                   //var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false&country_id=GB&city=Manchester
-   
-                 var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false&country_id=" + countryCode + "&city=" + cityName).Result;
+            {   
+                var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/latest?limit=100&page=1&offset=0&sort=desc&radius=1000&order_by=lastUpdated&dumpRaw=false&country_id=" + countryCode + "&city=" + cityName).Result;
 
                 MeasurementsDTO measurementsDTO = JsonConvert.DeserializeObject<MeasurementsDTO>(response);
 
@@ -55,7 +53,7 @@ namespace AirQualityService.Services
                 return new MeasurementsDTO();
             }
 
-            return returnValue; //returns all measurements for particular country and city  
+            return returnValue; 
         }
     }
 }

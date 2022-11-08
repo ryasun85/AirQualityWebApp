@@ -1,0 +1,60 @@
+﻿@model AirQualityWebApp.Models.AirQualityViewModel
+
+@{
+    ViewData["Title"] = "Measurements";
+}
+
+<h4>Measurements</h4>
+
+<div class="myClass">
+    City : @Model.CityName
+</div>
+@* @Html.DisplayFor(Model=>Model.CityName,new {@class="text-danger"})*@
+
+<table class="table datatable table-hover table-striped dt-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Parameter :")
+            </th>
+            <th>
+                @Html.DisplayName("Unit :")
+            </th>
+            <th>
+                @Html.DisplayName("Value :")
+            </th>
+            <th>
+                @Html.DisplayName("Last Updated :")
+            </th>
+            <th> @Html.DisplayName("Location :")</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @* @forach(var location in Model.Locations)
+        @foreach (var item in location.Measurements{}*@
+        @foreach (var item in Model.Measurements)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parameter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Back to Countries List", "Countries", null, null,new { @class = "btn btn-primary" })
+</div>

@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AirQualityWebApp.Models
-{
+{    /// <summary>
+     /// this class function is getting only required data from DTO 
+     /// rather than everything. Only this data will be passed onto the viewModel
+     /// </summary>
     public class CountriesData
     {
         public CountriesData(CountryDTO countryDTO)
@@ -23,10 +26,6 @@ namespace AirQualityWebApp.Models
                        
         }
 
-        public List<SelectListItem> Countries { get; set; } /*= default!;*/
-
-        //public string CountryName { get; set; }
-        //public string CountryCode { get; set; }
-        //public int Cities { get; set; }
+        public List<SelectListItem> Countries { get; set; }         
     }
 }

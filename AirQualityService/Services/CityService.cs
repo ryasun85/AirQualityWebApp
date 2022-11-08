@@ -19,44 +19,39 @@ namespace AirQualityService.Services
         public CityService(ILogger<CityService> logger)
         {
            //_httpClient.BaseAddress = new Uri("https://api.openaq.org/v2/");
-            //_httpClient.Timeout = new TimeSpan(0, 0, 30);
             _httpClient.DefaultRequestHeaders.Clear();
             _logger = logger;
         }
 
-
+        /// <summary>
+        /// Method that returns all countries    
+        /// </summary>
+        /// <param name="countryCode"></param>
+        /// <returns>CityDTO</returns>
         public CityDTO GetAllCitiesByCountry(string countryCode)
         {
             return GetCitiesByCountryApiCall(countryCode);
         }
 
-        //https://localhost:7034/AirQuality/TestCityService?code=af
+       
+        //TODO change methods async Task<CityDTO>
         private CityDTO GetCitiesByCountryApiCall(string countryCode)
         {
 
             CityDTO returnValue = new CityDTO();
 
             try
-            {
-
-                //var response = _httpClient.GetStringAsync("cities?limit=100&page=1&offset=0&sort=asc&order_by=city&country_id=" + countryCode).Result;
-
-                //cities Api call                         
-              var response = _httpClient.GetStringAsync("https://api.openaq.org/v2/cities?limit=100&page=1&offset=0&sort=asc&order_by=city&country_id=" + countryCode).Result;
+            {                        
+                var response =/* await*/ _httpClient.GetStringAsync("https://api.openaq.org/v2/cities?limit=100&page=1&offset=0&sort=asc&order_by=city&country_id=" + countryCode).Result;
 
                 CityDTO cityDTO = JsonConvert.DeserializeObject<CityDTO>(response);
-                       //IF check respons>=0 not just >0)  //TODO results null?? check META >=0
-                if (!string.IsNullOrWhiteSpace(response) && cityDTO.Meta.Found >= 0 /*&& cityDTO.Results != null*/)
+                
+                if (!string.IsNullOrWhiteSpace(response) && cityDTO.Meta.Found >= 0)
                 {
                     returnValue = cityDTO;
                     _logger.LogInformation("Success!");
                 }
-                //perhaps?
-                //else
-                //{
-                //    returnValue = new CityDTO();
-                //}
-
+                
             }
             catch (Exception ex)
             {
@@ -64,7 +59,7 @@ namespace AirQualityService.Services
                 return new CityDTO();
             }
 
-            return returnValue; //returns all cities for country 
+            return returnValue; 
         }
     }
 

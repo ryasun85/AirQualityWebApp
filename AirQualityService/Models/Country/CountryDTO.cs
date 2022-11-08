@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace AirQualityService.Models.Country
 {
 
-    // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
     public class Meta
     {
         [JsonPropertyName("name")]

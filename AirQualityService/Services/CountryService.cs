@@ -17,15 +17,11 @@ namespace AirQualityService.Services
         public CountryService(ILogger<CountryService> logger)
         {
           // _httpClient.BaseAddress = new Uri("https://api.openaq.org/v2/");
-            //_httpClient.Timeout = new TimeSpan(0, 0, 30);
             _httpClient.DefaultRequestHeaders.Clear();
            _logger = logger;
         }
 
-        /// <summary>
-        /// Method that returns all countries
-        /// </summary>
-        /// <returns>IEnumerable<CountryDTO><returns>
+        
         public CountryDTO GetAllCountries()
         {
             return GetAllCountriesApiCall();
