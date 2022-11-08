@@ -17,7 +17,7 @@ body {
   margin-bottom: 60px;
 }
 
-.myClass{
+.blueBoldText {
     font-weight: bold;
-    color :darkblue;
+    color: darkblue;
 }

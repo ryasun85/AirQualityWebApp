@@ -6,10 +6,6 @@
 
 <h3 class="alert-danger">@ViewBag.myErrorMsg</h3>
 
-<div>
-    @Html.ActionLink("Back to Countries List", "Countries", null, null,new { @class = "btn btn-primary" })
-</div>
-
 @if (Model.Cities != null && Model.Cities.Count() > 0)
 {
     <h4>Please select city from the list below:</h4>
@@ -27,4 +23,9 @@
         </div>
     }
 }
+
+<div style="margin-top:25px">
+    @Html.ActionLink("Back to Countries List", "Countries", null, null,new { @class = "btn btn-primary" })
+</div>
+
 
