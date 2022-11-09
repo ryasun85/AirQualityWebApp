@@ -79,6 +79,7 @@ namespace AirQualityWebApp.Controllers
             AirQualityViewModel airQualityViewModel = new AirQualityViewModel(measurementsData);
 
             airQualityViewModel.CityName = cityName;
+            airQualityViewModel.CountryCode = countryCode;
 
             return View(airQualityViewModel);
 

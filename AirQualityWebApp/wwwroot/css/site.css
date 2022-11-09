@@ -21,3 +21,7 @@ body {
     font-weight: bold;
     color: darkblue;
 }
+
+.yellowButton {
+    background-color: #ffc61a;
+}

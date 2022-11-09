@@ -58,6 +58,8 @@
     </table>
     <div>
         @Html.ActionLink("Back to Countries List", "Countries", null, null,new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to Cities List", "Cities", new { countryCode = Model.CountryCode },new { @class = "btn yellowButton" })
+
     </div>
 
     @section Scripts{
